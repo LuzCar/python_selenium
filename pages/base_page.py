@@ -4,7 +4,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-
 class BasePage:
     """Abstraction for base page."""
 
@@ -18,12 +17,18 @@ class BasePage:
         self._timeout = timeout
         self._url = url
         self._wait = WebDriverWait(driver, timeout)
+        self._window_handler = None
 
     def open(self):
         """Open the web page
         :return: None
         """
         self._driver.get(self._url)
+        self._window_handler = self._driver.current_window_handle
+
+    def move_to_main_tab(self):
+        """Move back to main page tab"""
+        self._driver.switch_to.window(self._window_handler)
 
     def close(self):
         """Close the web page
@@ -69,3 +74,4 @@ class BasePage:
         :return: None
         """
         self._driver.execute_script(f"arguments[0].value = '{value}'", element)
+

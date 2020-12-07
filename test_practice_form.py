@@ -9,9 +9,6 @@ try:
     page = PracticeForm(driver, 5)
     page.open()
     page.wait_until_loaded()
-    page.set_state('NCR')
-    page.set_city('Delhi')
-
 
     page.set_first_name('Luz Maria')
     print(f'First Name: {page.get_first_name()}')
@@ -46,8 +43,20 @@ try:
 
     page.set_current_address('TEST ADDRESS')
     print(f'Address: {page.get_current_address()}')
-    page.submit()
+
+    page.set_state('NCR')
+    print(f'State: {page.get_state()}')
+
+    page.set_city('Delhi')
+    print(f'State: {page.get_city()}')
+
+    confirmation_form = page.submit()
+
+    confirmation_form.wait_until_loaded()
+
+    info = confirmation_form.get_table_info()
+    print(info)
+    confirmation_form.close()
 
 finally:
-    input()
     driver.close()
