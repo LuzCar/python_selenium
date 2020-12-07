@@ -18,7 +18,7 @@ class HomePage(BasePage):
 
     def __init__(self, driver: WebDriver, timeout: int = 10):
         super().__init__(driver, timeout, self.__URL)
-        self.stay = Stay(self._driver,self.__STAYS_ROOT_XPATH,self._timeout)
+        self.stay = Stay(self._driver, self.__STAYS_ROOT_XPATH, self._timeout)
 
     def wait_until_loaded(self):
         """Wait until logo is loaded
